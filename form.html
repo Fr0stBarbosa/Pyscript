@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <title>Formulário</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-danger">Formulário</h2>
+        <form id="meu-formulario" class="mt-4">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Seu nome" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Seu email" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="mensagem" class="form-label">Motivo(s) pelo qual está se cadastrando</label>
+                <textarea class="form-control" id="mensagem" rows="4" placeholder="Seu(s) motivo(s)"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Escolha uma opção na qual você se enquadra</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="opcao" id="opcao1" value="Cliente" required>
+                    <label class="form-check-label" for="opcao1">Cliente</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="opcao" id="opcao2" value="Manicure" required>
+                    <label class="form-check-label" for="opcao2">Manicure</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Selecione uma opção que se identifica com seu nível de habilidade na área</label>
+                <select class="form-select" id="selecao" aria-label="Selecione uma opção" required>
+                    <option selected disabled>Escolha uma opção</option>
+                    <option value="Iniciante">Iniciante</option>
+                    <option value="Intermediária">Intermediária</option>
+                    <option value="Avançada">Avançada</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Escolha seus interesses (opcional)</label>
+                <select multiple class="form-select" id="interesses" aria-label="Escolha seus interesses">
+                    <option value="Design">Design</option>
+                    <option value="Programação">Programação</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Outros">Outros</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <py-script>
+        def enviar_formulario(event):
+            event.preventDefault()
+            nome = document.getElementById('nome').value
+            email = document.getElementById('email').value
+            mensagem = document.getElementById('mensagem').value
+            opcao = document.querySelector('input[name="opcao"]:checked').value
+            selecao = document.getElementById('selecao').value
+            interesses = document.getElementById('interesses').selectedOptions
+
+            console.log("Nome:", nome)
+            console.log("Email:", email)
+            console.log("Mensagem:", mensagem)
+            console.log("Opção:", opcao)
+            console.log("Seleção:", selecao)
+            console.log("Interesses:", [...interesses].map(option => option.value).join(', '))
+
+        formulario = document.getElementById('meu-formulario')
+        formulario.addEventListener('submit', enviar_formulario)
+    </py-script>
+</body>
+</html>
